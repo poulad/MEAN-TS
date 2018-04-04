@@ -1,0 +1,12 @@
+{
+    "name": "scripts",
+    "scripts": {
+        "start": "node build"
+    },
+    "private": true,
+    "dependencies": {},
+    "devDependencies": {
+        "chalk": "^2.3.2",
+        "shelljs": "^0.8.1"
+    }
+}
