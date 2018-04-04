@@ -51,9 +51,6 @@ export class Server {
             saveUninitialized: true
         }));
 
-        // this.app.use(passport.initialize());
-        // this.app.use(passport.session());
-
         this.app.use(express.static(__dirname + '/public', {dotfiles: 'ignore'}));
     }
 
@@ -64,7 +61,18 @@ export class Server {
 
         registerFooRoutes(router);
 
-        router.all('**', respondWith404);
+        {
+            // respond with 404 for routes matching "/api/*"
+            router.get(/^\/api(?:\/.*)?$/i, respondWith404);
+
+            // redirect all 404 GET requests to Angular
+            router.get('**', (req, res) => {
+                res.sendFile('public/index.html', {root: __dirname});
+            });
+
+            // respond all remaining requests with 404
+            router.all('**', respondWith404);
+        }
 
         this.app.use(router);
     }

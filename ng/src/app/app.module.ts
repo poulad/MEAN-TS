@@ -13,11 +13,13 @@ import {NavbarComponent} from './components/navbar/navbar.component';
 import {HomeComponent} from './components/home/home.component';
 import {FoosComponent} from './components/foos/foos.component';
 import {AddFooComponent} from './components/foos/add-foo/add-foo.component';
+import {NotFoundComponent} from './components/not-found/not-found.component';
 
 const routes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'foos', component: FoosComponent},
-    {path: '**', redirectTo: 'home'},
+    {path: '', redirectTo: 'home', pathMatch: 'full'},
+    {path: '**', component: NotFoundComponent},
 ];
 
 @NgModule({
@@ -27,6 +29,7 @@ const routes: Routes = [
         NavbarComponent,
         FoosComponent,
         AddFooComponent,
+        NotFoundComponent,
     ],
     imports: [
         CommonModule,
