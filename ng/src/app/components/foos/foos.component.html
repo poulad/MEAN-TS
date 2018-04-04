@@ -1,0 +1,36 @@
+<app-add-foo (fooAdded)="onFooAdded($event)"></app-add-foo>
+
+<div class="container">
+
+    <div *ngIf="error">
+        <div class="alert alert-danger">
+            <p>{{ error }}</p>
+        </div>
+    </div>
+
+    <ng-container *ngIf="foos">
+        <table class="table" *ngIf="foos.length; else noFoo">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col"><i class="fa fa-hashtag"></i> ID</th>
+                <th><i class="fa fa-info-circle"></i> Bar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let f of foos">
+                <th scope="row"><span>{{ f.id }}</span></th>
+                <td><span>{{ f.bar }}</span></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <ng-template #noFoo>
+            <h5>No <em>foo</em> found</h5>
+        </ng-template>
+    </ng-container>
+
+    <p class="text-center" *ngIf="isWaitingForResponse">
+        <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+    </p>
+
+</div>
