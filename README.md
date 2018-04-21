@@ -2,6 +2,8 @@
 
 A template of a MEAN stack web app written in TypeScript.
 
+[Demo on Heorku](https://poulad-mean.herokuapp.com)
+
 ## Getting Started
 
 ### Mongo DB
@@ -68,7 +70,7 @@ If you use Visual Studio Code, there are [configurations](./ng/.vscode/) to help
 1. Press `Ctrl + Shift + B` (Run Default Build Task) to run `ng serve` in background
 1. Press F5 to debug
 
-### Configurations
+## Configurations
 
 Mongo Db connection string could be set in [config files](./src/config/env) or as `APP_MONGO` environment variable.
 
