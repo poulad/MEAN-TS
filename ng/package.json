@@ -1,5 +1,5 @@
 {
-    "name": "comp308-assignment3-ng",
+    "name": "mean-ts-ng",
     "version": "1.0.0",
     "license": "MIT",
     "scripts": {
@@ -8,6 +8,7 @@
         "build": "npm run ng -- build",
         "build:prod": "npm run ng -- build --prod --output-path \"../dist/public\"",
         "test": "npm run ng -- test",
+        "test:ci": "npm run test -- --watch false --code-coverage true",
         "lint": "npm run ng -- lint",
         "e2e": "npm run ng -- e2e"
     },
@@ -37,6 +38,7 @@
         "@types/jasminewd2": "~2.0.2",
         "@types/node": "~6.0.60",
         "codelyzer": "^4.0.1",
+        "coveralls": "^3.0.1",
         "jasmine-core": "~2.8.0",
         "jasmine-spec-reporter": "~4.2.1",
         "karma": "~2.0.0",
@@ -44,6 +46,7 @@
         "karma-coverage-istanbul-reporter": "^1.2.1",
         "karma-jasmine": "~1.1.0",
         "karma-jasmine-html-reporter": "^0.2.2",
+        "mocha-lcov-reporter": "^1.3.0",
         "protractor": "~5.1.2",
         "ts-node": "~4.1.0",
         "tslint": "~5.9.1",

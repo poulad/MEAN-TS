@@ -1,12 +1,13 @@
 # MEAN with TypeScript
 
+[![CircleCI](https://circleci.com/gh/pouladpld/MEAN-TS.svg?style=svg)](https://circleci.com/gh/pouladpld/MEAN-TS)
+[![Coverage Status](https://coveralls.io/repos/github/pouladpld/MEAN-TS/badge.svg)](https://coveralls.io/github/pouladpld/MEAN-TS)
 [![BCH compliance](https://bettercodehub.com/edge/badge/pouladpld/MEAN-TS?branch=master)](https://bettercodehub.com/)
 [![codebeat badge](https://codebeat.co/badges/8bc2872b-9670-4c96-92cd-ad2fa6fb4b46)](https://codebeat.co/projects/github-com-pouladpld-mean-ts-master-b1e3d67d-0664-4cf9-9262-33172c85c4ac)
-[![CircleCI](https://circleci.com/gh/pouladpld/MEAN-TS.svg?style=svg)](https://circleci.com/gh/pouladpld/MEAN-TS)
 
 A template of a MEAN stack web app written in TypeScript.
 
-[Demo on Heorku](https://poulad-mean.herokuapp.com)
+[Demo on Heroku](https://poulad-mean.herokuapp.com)
 
 ## Getting Started
 
@@ -94,7 +95,7 @@ node build.js
 node bin/www.js
 ```
 
-### Heorku
+### Heroku
 
 App is ready to be deployed on [Heroku](https://www.heroku.com). Add the following environment variables in application settings:
 
