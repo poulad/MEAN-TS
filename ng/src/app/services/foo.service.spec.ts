@@ -1,62 +1,57 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
-import { of } from 'rxjs/observable/of';
-import { defer } from 'rxjs/observable/defer';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { FooService } from './foo.service';
 import { ApiResponse } from '../models/api-response';
 import { Foo } from '../models/foo';
 
 describe('foo service', () => {
 
-    const mockData: Foo[] = [
-        {id: '0', bar: 'bar0'},
-        {id: '1', bar: 'bar1'},
-    ];
-
-    let mockHttpClient: { get: any };
+    let httpTestingController: HttpTestingController;
 
     beforeEach(() => {
-        mockHttpClient = jasmine.createSpyObj('HttpClient', ['get']);
-        mockHttpClient.get.and.returnValue(of(
-            <ApiResponse>{
-                ok: true,
-                data: mockData
-            }
-        ));
-
         TestBed.configureTestingModule({
-            imports: [HttpClientModule],
-            providers: [
-                {provide: HttpClient, useValue: mockHttpClient},
-                FooService
-            ]
+            imports: [HttpClientTestingModule],
+            providers: [FooService]
         });
+        httpTestingController = TestBed.get(HttpTestingController);
+    });
+    afterEach(() => {
+        httpTestingController.verify();
     });
 
-    it('should return all foos from API response', () => {
+    it('#getAll should return all foos from API response', () => {
+        const testData: Foo[] = [
+            {id: '0', bar: 'bar0'},
+            {id: '1', bar: 'bar1'},
+        ];
         const service = <FooService>TestBed.get(FooService);
+
         service.getAll().subscribe(
-            foos => expect(foos).toEqual(mockData),
+            foos => expect(foos).toEqual(testData),
             fail
         );
-        expect(mockHttpClient.get.calls.count()).toBe(1);
+
+        const req = httpTestingController.expectOne('/api/foos');
+        expect(req.request.method).toEqual('GET');
+
+        req.flush(<ApiResponse> {ok: true, data: testData});
     });
 
-    it('should return an error when web API responds with 404', () => {
-        const errorResponse = new HttpErrorResponse({
-            status: 404,
-            statusText: 'Not Found'
+    it('#getAll should return an error when web API responds with 404', () => {
+        const errorMessage = 'test network error';
+        const mockError = new ErrorEvent('Network error', {
+            message: errorMessage,
         });
-        mockHttpClient.get.and.returnValue(defer(() => Promise.reject(errorResponse)));
 
         const service = <FooService>TestBed.get(FooService);
         service.getAll().subscribe(
             foos => fail('expected an error'),
             e => {
-                console.log(e);
-                expect(e.message).toContain('Not Found');
+                expect(e.message).toEqual('test network error');
             }
         );
-        expect(mockHttpClient.get.calls.count()).toBe(1);
+
+        const req = httpTestingController.expectOne('/api/foos');
+        expect(req.request.method).toEqual('GET');
     });
 });
